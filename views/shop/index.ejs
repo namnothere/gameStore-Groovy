@@ -1,0 +1,94 @@
+<%- include ../partials/header %>
+
+<div class="container-fluid">
+  <!-- Flash messages -->
+  <% if(successMsg || errorMsg) {%>
+  <div class="row mt-3 mb-3">
+    <div class="col-md-12 m-auto">
+      <% if (successMsg) { %>
+      <div id="success" class="alert alert-success">
+        <%= successMsg %>
+      </div>
+      <% } else { %>
+      <div id="success" class="alert alert-success d-none"></div>
+      <% } %>
+    </div>
+    <div class="col-md-12 m-auto">
+      <% if (errorMsg) { %>
+      <div id="error" class="alert alert-danger">
+        <%= errorMsg %>
+      </div>
+      <% } else { %>
+      <div id="error" class="alert alert-danger d-none"></div>
+      <% } %>
+    </div>
+  </div>
+  <% } %>
+
+  <div class="page-style-a">
+    <div class="container">
+        <div class="page-intro">
+            <h2><%=pageName%></h2>
+            <!-- <%if (breadcrumbs) { %>
+            <ul class="bread-crumb">
+              <% breadcrumbs.forEach(crumb => { if(!crumb.name.startsWith("?")){%>
+                <li class="is-marked">
+                    <a href="<%=crumb.url%>">Shop</a>
+                </li>
+                <%}})%>
+            </ul>
+            <%} %> -->
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Contents -->
+  <div class="row pl-4 pr-4 mt-4">
+    <% if (products) { %>
+      <% for(let i=0; i<products.length; i++) { %>
+      <div class="item">
+          <div class="image-container">
+              <a class="item-img-wrapper-link" href="/products/<%=products[i].category.slug%>/<%=products[i]._id%>">
+                  <img class="img-fluid" style="height: 300px;width: 300px;object-fit: contain" src="<%= products[i].imagePath %>" alt="Product">
+              </a>
+              <div class="item-action-behaviors">
+                  <% if(products[i].available) {%>
+                    <a class="item-addCart" href="/add-to-cart/<%=products[i]._id%>">Add to Cart</a>
+                    <% }%>
+              </div>
+          </div>
+          <div class="item-content">
+              <div class="what-product-is">
+                  <ul class="bread-crumb">
+                      <li class="">
+                          <a href="<%=products[i].category.slug%>"><%=products[i].category.title%></a>
+                      </li>
+                  </ul>
+                  <h6 class="item-title">
+                      <a href="/products/<%=products[i].category.slug%>/<%=products[i]._id%>"><%= products[i].title %></a>
+                  </h6>
+              </div>
+              <div class="price-template">
+                  <div class="item-new-price">
+                    <% if (products[i].price == 0) { %>
+                      Free
+                    <% } else { %>
+                      $<%= products[i].price %>
+                    <% } %>
+                  </div>
+              </div>
+          </div>
+          <div class="tag new">
+              <span>NEW</span>
+          </div>
+      </div>
+      <%}%>
+<%}%>
+  </div>
+
+  <%- include ../partials/pagination %>
+</div>
+
+<%- include ../partials/footer %>

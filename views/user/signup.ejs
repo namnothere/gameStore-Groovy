@@ -1,0 +1,83 @@
+<%- include ../partials/header %>
+
+<div class="page-account u-s-p-t-80">
+  <div class="container">
+    <div class="row">
+      <!-- Login -->
+      <div class="col-lg-12">
+        <div class="login-wrapper">
+          <h2 class="account-h2 u-s-m-b-20">Sign Up</h2>
+          <% if(errorMsg !=null && errorMsg.length>0) {%>
+          <div id="flash-msg" class="alert alert-danger"><%=errorMsg %></div>
+          <%}%>
+          <form action="/user/signup" method="POST">
+            <div class="u-s-m-b-30">
+              <label for="name"
+                >Name
+                <span class="astk">*</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="text-field"
+                placeholder="Name"
+              />
+            </div>
+            <div class="u-s-m-b-30">
+              <label for="user-name-email"
+                >Email Address
+                <span class="astk">*</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="user-name-email"
+                class="text-field"
+                placeholder="Username / Email"
+              />
+            </div>
+            <div class="u-s-m-b-30">
+              <label for="login-password"
+                >Password
+                <span class="astk">*</span>
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="login-password"
+                class="text-field"
+                placeholder="Password"
+              />
+            </div>
+            <div class="u-s-m-b-30">
+              <label for="login-password2"
+                >Password
+                <span class="astk">*</span>
+              </label>
+              <input
+                type="password"
+                name="password2"
+                id="login-password2"
+                class="text-field"
+                placeholder="Verify Password"
+              />
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <div class="m-b-45">
+              <button
+                type="submit"
+                class="button button-outline-secondary w-100"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Login /- -->
+    </div>
+  </div>
+</div>
+
+<%- include ../partials/footer %>

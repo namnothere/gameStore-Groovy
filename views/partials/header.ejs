@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% if (pageName) { %>
+    <title>Groovy | <%= pageName %></title>
+    <%} else {%>
+    <title>Shopping Cart</title>
+    <% } %>
+
+    <!-- <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="icon" href="/images/favicon.ico">
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:400,800"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="/css/ionicons.min.css" />
+    <link rel="stylesheet" href="/css/animate.min.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/jquery-ui-range-slider.min.css" />
+    <link rel="stylesheet" href="/css/utility.css" />
+    <link rel="stylesheet" href="/css/bundle.css" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" href="/images/favicon.ico">
+    <!-- Base Google Font for Web-app -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <!-- Google Fonts for Banners only -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href="/css/fontawesome.min.css">
+    <!-- Ion-Icons 4 -->
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <!-- Owl-Carousel -->
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <!-- Jquery-Ui-Range-Slider -->
+    <link rel="stylesheet" href="/css/jquery-ui-range-slider.min.css">
+    <!-- Utility -->
+    <link rel="stylesheet" href="/css/utility.css">
+    <!-- Main -->
+    <link rel="stylesheet" href="/css/bundle.css">
+  </head>
+
+  <body>
+    <!-- app -->
+    <div id="app">
+    <!-- Header -->
+    <header>
+      <!-- Top-Header -->
+      <div class="full-layer-outer-header">
+        <div class="container clearfix">
+          <nav>
+            <ul class="primary-nav g-nav">
+              <li>
+                <a href="tel:+1116116116">
+                  <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
+                  Telephone:+1-116-116-116</a
+                >
+              </li>
+              <li>
+                <a href="mailto:contact@domain.com">
+                  <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
+                  E-mail: contact@domain.com
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <nav>
+            <ul class="secondary-nav g-nav">
+              <li>
+                <a
+                  >My Account
+                  <i class="fas fa-chevron-down u-s-m-l-9"></i>
+                </a>
+                <ul class="g-dropdown" style="width: 200px">
+                  <li>
+                    <a href="/shopping-cart">
+                      <i class="fas fa-cog u-s-m-r-9"></i>
+                      My Cart</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/checkout">
+                      <i class="far fa-check-circle u-s-m-r-9"></i>
+                      Checkout</a
+                    >
+                  </li>
+                  <% if (typeof user === 'undefined') { %>
+                  <li>
+                    <a href="/user/signin">
+                      <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                      Sign in</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/user/signup">
+                      <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                      Sign up</a
+                    >
+                  </li>
+
+                  <% } %>
+                  
+                  <!-- if user is logged in then create a logout button -->
+                  <% if (typeof user !== 'undefined') { %>
+                    <li>
+                      <a href="/user/profile">
+                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                        Profile</a
+                      >
+                    </li>
+                    <li>
+                      <a href="/user/logout">
+                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                        Logout</a
+                      >
+                    </li>
+                  <% } %>
+
+                </ul>
+              </li>
+              <!-- if user is logged in then create a balance box -->
+              <% if (typeof user !== 'undefined') { %>
+              <li>
+                <a class="header-balance__wrapper" bis_skin_checked="1">
+                  <div class="display-balance" bis_skin_checked="1">
+                    <span class="display-balance__text">
+                      <%= user.credit %>
+                      <svg data-v-21e2a871="" width="22" height="22">
+                        <path data-v-21e2a871="" d="M21.72 4a.86.86 0 000-.17c0-1.7-4.44-3.09-9.93-3.09S1.9 2.14 1.9 3.84a1.46 1.46 0 000 .22.86.86 0 01-.04-.06v2.55c0 .55.61 1.15 1.68 1.7 0 0 2.63 1.58 8.26 1.64a21.28 21.28 0 007-1.09c1.82-.64 2.91-1.46 2.91-2.19V4.05a.28.28 0 000-.09.08.08 0 01.01.04zM4.37 3.31c.73-1 3.78-1.71 7.43-1.71s6.78.75 7.46 1.74a.72.72 0 01.14.41v.41a2.55 2.55 0 00-.4-.32c-1.07-.76-3.9-1.2-7.18-1.2s-6 .4-7.1 1.14a1.73 1.73 0 00-.49.38v-.41a.77.77 0 01.14-.44zm15.52 6.46v2.55c0 .73-1.08 1.55-2.91 2.2a21 21 0 01-7 1.08c-5.67-.06-8.3-1.6-8.3-1.6C.61 13.42 0 12.82 0 12.27v-2.5a.28.28 0 010-.09.76.76 0 010-.16C0 9 .57 8.38 1.55 7.9V8c0 .58.67 1.21 1.85 1.78 0 0 2.58 1.38 8.1 1.55a19.56 19.56 0 007-1.08 10.48 10.48 0 001.32-.56 1 1 0 01-.08.28 1.59 1.59 0 00.12-.27zM22 15.41v2.5c0 .55-.61 1.15-1.68 1.7 0 0-2.63 1.57-8.27 1.63a21 21 0 01-7-1.08C3.19 19.52 2.11 18.7 2.11 18v-2.68a1.89 1.89 0 00.09.21 10.35 10.35 0 001.23.52 19.78 19.78 0 007 1.08c5.52-.18 8.1-1.55 8.1-1.55 1.17-.57 1.85-1.2 1.85-1.78v-.08c1 .48 1.54 1 1.54 1.65v-.06a.28.28 0 01.08.1z"></path>
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              </li>
+              <% } %>
+              <li>
+                <a
+                  >USD
+                  <i class="fas fa-chevron-down u-s-m-l-9"></i>
+                </a>
+                <ul class="g-dropdown" style="width: 90px">
+                  <li>
+                    <a href="#" class="u-c-brand">($) USD</a>
+                  </li>
+                  <li>
+                    <a href="#">(£) GBP</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- Top-Header /- -->
+      <!-- Mid-Header -->
+      <div class="full-layer-mid-header">
+        <div class="container">
+          <div class="row clearfix align-items-center">
+            <div class="col-lg-3 col-md-9 col-sm-6">
+              <div class="brand-logo text-lg-center">
+                <a href="/" style="color: white">
+                  <img
+                    src="/images/shop-icon.png"
+                    alt="Groover Brand Logo"
+                    class="app-brand-logo"
+                    style="height: 50px;"
+                  />
+                  Groovy
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-6 u-d-none-lg">
+              <form class="form-searchbox" action="/products/search" method="GET">
+                <label class="sr-only" for="search-landscape">Search</label>
+                <input
+                  name="search"
+                  type="text"
+                  class="text-field"
+                  placeholder="Search everything"
+                />
+                <button
+                  id="btn-search"
+                  type="submit"
+                  class="button button-primary fas fa-search"
+                ></button>
+              </form>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+              <nav>
+                <ul class="mid-nav g-nav">
+                  <!-- <li class="u-d-none-lg">
+                    <a href="home.html">
+                      <i class="ion ion-md-home u-c-brand"></i>
+                    </a>
+                  </li>
+                  <li class="u-d-none-lg">
+                    <a href="wishlist.html">
+                      <i class="far fa-heart"></i>
+                    </a>
+                  </li> -->
+                  <li>
+                    <a href="/shopping-cart">
+                      <i class="ion ion-md-basket"></i>
+                      <% if(session.cart) { %>
+                      <span class="item-counter"><%= session.cart.totalQty %></span>
+                      <!-- <span class="item-price">$220.00</span> -->
+                      <% } else { %>
+                      <span class="item-counter">0</span>
+                      <% } %>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mid-Header /- -->
+      <!-- Responsive-Buttons -->
+      <div class="fixed-responsive-container">
+        <div class="fixed-responsive-wrapper">
+          <button
+            type="button"
+            class="button fas fa-search"
+            id="responsive-search"
+          ></button>
+        </div>
+      </div>
+      <!-- Responsive-Buttons /- -->
+      <!-- Mini Cart -->
+      <!-- <div class="mini-cart-wrapper">
+        <div class="mini-cart">
+          <div class="mini-cart-header">
+            YOUR CART
+            <button
+              type="button"
+              class="button ion ion-md-close"
+              id="mini-cart-close"
+            ></button>
+          </div>
+          <ul class="mini-cart-list">
+            <li class="clearfix">
+              <a href="single-product.html">
+                <img src="images/product/product@1x.jpg" alt="Product" />
+                <span class="mini-item-name">Casual Hoodie Full Cotton</span>
+                <span class="mini-item-price">$55.00</span>
+                <span class="mini-item-quantity"> x 1 </span>
+              </a>
+            </li>
+            <li class="clearfix">
+              <a href="single-product.html">
+                <img src="images/product/product@1x.jpg" alt="Product" />
+                <span class="mini-item-name"
+                  >Black Rock Dress with High Jewelery Necklace</span
+                >
+                <span class="mini-item-price">$55.00</span>
+                <span class="mini-item-quantity"> x 1 </span>
+              </a>
+            </li>
+            <li class="clearfix">
+              <a href="single-product.html">
+                <img src="images/product/product@1x.jpg" alt="Product" />
+                <span class="mini-item-name">Xiaomi Note 2 Black Color</span>
+                <span class="mini-item-price">$55.00</span>
+                <span class="mini-item-quantity"> x 1 </span>
+              </a>
+            </li>
+            <li class="clearfix">
+              <a href="single-product.html">
+                <img src="images/product/product@1x.jpg" alt="Product" />
+                <span class="mini-item-name">Dell Inspiron 15</span>
+                <span class="mini-item-price">$55.00</span>
+                <span class="mini-item-quantity"> x 1 </span>
+              </a>
+            </li>
+          </ul>
+          <div class="mini-shop-total clearfix">
+            <span class="mini-total-heading float-left">Total:</span>
+            <span class="mini-total-price float-right">$220.00</span>
+          </div>
+          <div class="mini-action-anchors">
+            <a href="cart.html" class="cart-anchor">View Cart</a>
+            <a href="checkout.html" class="checkout-anchor">Checkout</a>
+          </div>
+        </div>
+      </div> -->
+      <!-- Mini Cart /- -->
+      <!-- Bottom-Header -->
+      <div class="full-layer-bottom-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-3">
+              <div class="v-menu v-close">
+                <span class="v-title">
+                  <i class="ion ion-md-menu"></i>
+                  All Categories
+                  <i class="fas fa-angle-down"></i>
+                </span>
+                <nav>
+                  <div class="v-wrapper">
+                    <ul class="v-list animated fadeIn">
+                      <li <% if (pageName == "All Products") { %>
+                        class="nav-item active"
+                        <%} else {%>
+                          class="nav-item"
+                        <%} %> 
+                      >
+                        <a class="nav-link" href="/products/">All</a>
+                      </li>
+                      <!-- Limit to 6 most popular categories -->
+
+                      <% if (categories) { %>
+                        <% categories = categories.slice(0, 7) %>
+                        <% categories.forEach( category => { %>
+                          <li <% if (pageName === category.title) { %>
+                            class="nav-item active"
+                            <% } else { %>
+                              class="nav-item"
+                            <% } %> 
+                          >
+                        <a href="/products/<%= category.slug %>">
+                          <%= category.title %>
+                        </a>
+                      </li>
+                      <% }) %>
+                    <% } %>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <ul class="bottom-nav g-nav u-d-none-lg">
+                <!-- <li>
+                  <a href="custom-deal-page.html"
+                    >New Arrivals
+                  </a>
+                </li> -->
+                <% if (categories) { %>
+                  <% categories = categories.slice(0, 3) %>
+                  <% categories.forEach( category => { %>
+                    <li <% if (pageName === category.title) { %>
+                      class="nav-item active"
+                      <% } else { %>
+                        class="nav-item"
+                      <% } %> 
+                    >
+                  <a href="/products/<%= category.slug %>">
+                    <%= category.title %>
+                  </a>
+                </li>
+                <% }) %>
+              <% } %>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom-Header /- -->
+    </header>
+

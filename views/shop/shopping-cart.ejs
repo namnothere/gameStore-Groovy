@@ -1,0 +1,165 @@
+<%- include ../partials/header %>
+
+<div class="page-cart u-s-p-t-80">
+  <div class="container">
+    <% if (cart != null && !cart.paid ) { %>
+    <div class="row">
+      <div class="col-lg-12">
+        <form>
+          <!-- Products-List-Wrapper -->
+          <div class="table-wrapper u-s-m-b-20">
+            <table>
+              <thead>
+                <tr>
+                  <th style="color: white">Product</th>
+                  <th style="color: white">Price</th>
+                  <th style="color: white">Quantity</th>
+                  <!-- <th>Subtotal</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <% products.forEach( product => { %> <% if(product != null) {%>
+                <tr>
+                  <td>
+                    <div class="cart-anchor-image">
+                      <a
+                        href="/products/<%=product.category.slug%>/<%=product._id%>"
+                      >
+                        <img src="<%=product.imagePath%>" alt="Product" />
+                        <h6><%= product.title %></h6>
+                      </a>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="cart-price" style="color: white">$<%= product.price %></div>
+                  </td>
+                  <td>
+                    <div class="cart-quantity">
+                      <div class="quantity">
+                        <input
+                          type="text"
+                          class="quantity-text-field"
+                          value="<%= product.qty %>"
+                        />
+                        <a
+                          href="/add-to-cart/<%=product._id%>"
+                          class="plus-a"
+                          data-max="1000"
+                          >&#43;</a
+                        >
+                        <a
+                          href="/reduce/<%=product._id%>"
+                          class="minus-a"
+                          data-min="1"
+                          >&#45;</a
+                        >
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <!-- <div class="action-wrapper">
+                                          <a href="/reduce/<%=product._id%>" class="button button-outline-secondary fas fa-trash"></a>
+                                      </div> -->
+                  </td>
+                </tr>
+                <% } %> <% }) %>
+              </tbody>
+            </table>
+          </div>
+          <!-- Products-List-Wrapper /- -->
+
+          <!-- Payment Method -->
+          <form>
+            <div class="payment">
+              <div class="payment-item">
+                <input type="radio" id="coin" name="paymentMethod" value="coin">
+                <label for="html" style="color: white">Coins</label>
+              </div>
+              <div class="payment-item">
+                <input type="radio" id="cc" name="paymentMethod" value="cc" checked>
+                <label for="css" style="color: white">Credit Card</label><br>
+              </div>
+              <style>
+                .payment {
+                  display: flex;
+                  justify-content: space-between;
+                  flex-wrap: wrap;
+                }
+                .payment-item {
+                  margin: 5px auto;
+                }
+              </style>
+              <!-- Custom Element lol /- -->
+            </div>
+            <!-- Payment Method /- -->
+          </form>
+
+
+          <!-- Coupon -->
+          <div class="coupon-continue-checkout u-s-m-b-60">
+            <!-- <div class="coupon-area"></div> -->
+            <div class="button-area">
+              <a href="/" class="continue">Continue Shopping</a>
+              <!-- <a href="/checkout" class="checkout">Proceed to Checkout</a> -->
+              <a href="/checkout" class="checkout" onclick="return validate(this)">Proceed to Checkout</a>
+            </div>
+          </div>
+          <!-- Coupon /- -->
+
+          <form id="paymentPost" method="POST" action="/checkout">
+            <input type="hidden" name="paymentMethod" value="coin" />
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          </form>
+
+          <!-- Event Handler -->
+
+          <script>
+            
+            function validate(form) { 
+              // validation code here ...
+              let csrf = document.getElementsByName('_csrf')[0].value;
+              if($('#coin').is(':checked')) {
+                if (confirm('Are you sure to pay using coins?')) {
+                  $("#paymentPost").submit();
+                  return false;
+                }}
+              window.location.href = '/checkout';
+              return false;
+            }
+          </script>
+          <!-- Event Handler /- -->
+
+        </form>
+
+        <!-- Billing -->
+        <div class="calculation u-s-m-b-60">
+          <div class="table-wrapper-2">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <h3 class="calc-h3 u-s-m-b-0">Total</h3>
+                  </td>
+                  <td>
+                    <span class="calc-text" style="color: white"> <b>$<%= cart.totalCost %></b></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Billing /- -->
+      </div>
+    </div>
+    <% } else { %>
+    <div class="row text-center">
+      <div class="col-md-9 col-sm-9 m-auto">
+        <h2>No items in the cart</h2>
+      </div>
+    </div>
+
+    <% } %>
+  </div>
+</div>
+
+<%- include ../partials/footer %>

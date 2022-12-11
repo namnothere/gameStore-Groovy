@@ -1,0 +1,71 @@
+<%- include ../partials/header %>
+
+<div class="page-cart u-s-p-t-80">
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <div class="col-md-8 m-auto">
+        <% if (successMsg) { %>
+        <div id="success" class="alert alert-success"><%= successMsg %></div>
+        <% } else { %>
+        <div id="success" class="alert alert-success d-none"></div>
+        <% } %>
+      </div>
+      <div class="col-md-8 m-auto">
+        <% if (errorMsg) { %>
+        <div id="error" class="alert alert-danger"><%= errorMsg %></div>
+        <% } else { %>
+        <div id="error" class="alert alert-danger d-none"></div>
+        <% } %>
+      </div>
+    </div>
+
+    <% if (orders != null && orders.length > 0) { %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-wrapper u-s-m-b-60">
+          <table>
+            <thead>
+              <tr>
+                <th style="color: white">Product</th>
+                <th style="color: white">Price</th>
+                <th style="color: white">Quantity</th>
+                <th style="color: white">Price Per Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% orders.forEach( order => { %> <%
+              order.cart.items.forEach(item=> { %>
+              <tr>
+                <td>
+                  <div class="cart-anchor-image">
+                    <h6><%= item.title %></h6>
+                  </div>
+                </td>
+                <td>
+                  <div class="cart-price" style="color: white">$<%= item.price %></div>
+                </td>
+                <td>
+                  <div class="cart-quantity" style="color: white"><%= item.qty %> Units</div>
+                </td>
+                <td>
+                  <div class="cart-quantity" style="color: white">$<%= item.price %></div>
+                </td>
+              </tr>
+              <%}) %> <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <div class="row text-center">
+      <div class="col-md-9 col-sm-9 m-auto">
+        <h2>You have not made any orders yet</h2>
+      </div>
+    </div>
+
+    <% } %>
+  </div>
+</div>
+
+<%- include ../partials/footer %>
